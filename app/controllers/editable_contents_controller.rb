@@ -30,8 +30,11 @@ class EditableContentsController < ApplicationController
   end
   
   def destroy
+    raise "Cannot Destroy protected system content" if @editable_content.system?
     @editable_content.destroy
     redirect_to editable_contents_path
+  rescue => e
+    render :action => :show, :alert => e.message
   end
   
   private

@@ -53,6 +53,7 @@ var TextEditor = {
         fullUnorderedList: '\n- an item\n- another item\n- etc.\n',
         blockquote: '> ',    
         fullBlockquote: '\n> Type your quote here.\n',
+        table: '\ncolumn heading | column heading | column heading\n-------------- | -------------- | --------------\nyour text here | your text here | your text here\nyour text here | your text here | your text here\n',
         link: '[@@text](@@href)',
         heading1: '# ',
         heading2: '## ',
@@ -132,6 +133,9 @@ var TextEditor = {
         } else {
             this.insertAtCaret(this.formatting.fullBlockquote);
         }
+    },
+    table: function(){
+        this.replaceSelection(this.formatting.table);
     },    
     link: function(){
         var selection = this.selection();        
@@ -311,16 +315,17 @@ $(document).ready(function(){
         var addTextEditor = function(element){
             var wrapper = $('<span class="text_editor_wrapper"></span>');
             var controls = $('<span class="text_editor_controls"></span>');
-            var h1 = $('<span class="control">H1</span>');
-            var h2 = $('<span class="control">H2</span>');
-            var h3 = $('<span class="control">H3</span>');
-            var bold = $('<span class="control"><b>B</b></span>');
-            var italic = $('<span class="control"><i>I</i></span>');
-            var blockquote = $('<span class="control">&rdquo;</span>');
-            var ordered = $('<span class="control"><img src="<%= asset_path "ordered_list.png" %>"/></span>');
-            var unordered = $('<span class="control"><img src="<%= asset_path "unordered_list.png" %>"/></span>');
-            var link = $('<span class="control"><img src="<%= asset_path "link.png" %>" style="padding: 7px"/></span>');
-            var contentSearchInput = $('<input class="popup_item_search" type="search" size="30" placeholder="Find + link to item, gallery, media, wiki" />');
+            var h1 = $('<span class="control" title="Heading 1">H1</span>')[0];
+            var h2 = $('<span class="control" title="Heading 2">H2</span>')[0];
+            var h3 = $('<span class="control" title="Heading 3">H3</span>')[0];
+            var bold = $('<span class="control" title="Bold"><b>B</b></span>')[0];
+            var italic = $('<span class="control" title="Italic"><i>I</i></span>')[0];
+            var blockquote = $('<span class="control" title="Quote">&rdquo;</span>')[0];
+            var ordered = $('<span class="control" title="Ordered List"><img src="<%= asset_path "ordered_list.png" %>"/></span>')[0];
+            var unordered = $('<span class="control" title="Bullet Points"><img src="<%= asset_path "unordered_list.png" %>"/></span>')[0];
+            var table = $('<span class="control" title="Insert Table"><img src="<%= asset_path "table.png" %>"/></span>')[0];
+            var link = $('<span class="control" title="Insert Link"><img src="<%= asset_path "link.png" %>" style="padding: 7px"/></span>')[0];
+            var contentSearchInput = $('<input class="popup_item_search" type="search" size="30" placeholder="Find + link to item, gallery, media, wiki" />')[0];
 
             controls.append(h1);
             controls.append(h2);
@@ -333,6 +338,8 @@ $(document).ready(function(){
             controls.append(ordered);
             controls.append(unordered);
             controls.append($('<span class="separator"></span>'));
+            controls.append(table);
+            controls.append($('<span class="separator"></span>'));
             controls.append(link);
             controls.append($('<span class="separator"></span>'));
 //            controls.append(contentSearchInput);
@@ -342,7 +349,12 @@ $(document).ready(function(){
             wrapper.append(controls)
             wrapper.append(element);
 
-            TextEditor.initialize(element, {'heading1':h1[0], 'heading2':h2[0], 'heading3':h3[0], 'bold':bold[0], 'italic':italic[0], 'blockquote':blockquote[0], 'orderedList':ordered[0], 'unorderedList':unordered[0], 'link': link[0]});
+            TextEditor.initialize(element, {
+                'heading1':h1, 'heading2':h2, 'heading3':h3,
+                'bold':bold, 'italic':italic, 'blockquote':blockquote,
+                'orderedList':ordered, 'unorderedList':unordered,
+                'table':table,
+                'link':link});
 
             var textArea = element;
 
