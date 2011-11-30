@@ -22,7 +22,7 @@ class EditableContent < ActiveRecord::Base
   end
   
   def to_html
-    markdown(self.body).html_safe
+    markdown(self.body)
   end
   
   private

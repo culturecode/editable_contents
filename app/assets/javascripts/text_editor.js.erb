@@ -46,7 +46,7 @@ var TextEditor = {
     // TEXTILE FORMATTING
     formatting:{
         bold: '**',
-        italic: '*',
+        italic: '_',
         orderedList: '1. ',
         unorderedList: '- ',
         fullOrderedList: '\n1. first item\n2. second item\n3. etc.\n',
@@ -316,8 +316,8 @@ $(document).ready(function(){
             var wrapper = $('<span class="text_editor_wrapper"></span>');
             var controls = $('<span class="text_editor_controls"></span>');
             var h1 = $('<span class="control" title="Heading 1">H1</span>')[0];
-            var h2 = $('<span class="control" title="Heading 2">H2</span>')[0];
-            var h3 = $('<span class="control" title="Heading 3">H3</span>')[0];
+            var h2 = $('<span class="control heading2" title="Heading 2">H2</span>')[0];
+            var h3 = $('<span class="control heading3" title="Heading 3">H3</span>')[0];
             var bold = $('<span class="control" title="Bold"><b>B</b></span>')[0];
             var italic = $('<span class="control" title="Italic"><i>I</i></span>')[0];
             var blockquote = $('<span class="control" title="Quote">&rdquo;</span>')[0];
