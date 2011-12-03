@@ -21,8 +21,8 @@ class EditableContent < ActiveRecord::Base
     self.body
   end
   
-  def to_html
-    markdown(self.body)
+  def to_html(options = nil)
+    markdown(self.body, options)
   end
   
   private
