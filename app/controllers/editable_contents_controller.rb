@@ -16,17 +16,11 @@ class EditableContentsController < ApplicationController
     render :action => :new
   end
   
-  def show
-  end
-  
-  def edit
-  end
-    
   def update
     @editable_content.update_attributes!(params[:editable_content])
     redirect_to @editable_content
   rescue ActiveRecord::RecordInvalid
-    render :action => :new
+    render :action => :edit
   end
   
   def destroy
