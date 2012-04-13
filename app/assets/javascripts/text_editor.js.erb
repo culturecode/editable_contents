@@ -257,7 +257,7 @@ var TextEditor = {
         var front = (this.input.value).substring(0, selection.start);
         var back = (this.input.value).substring(selection.end);
         this.input.value = front + text + back;
-        this.clearSelection();
+        this.createSelection(selection.start, selection.start);
         this.input.scrollTop = scrollPos;                    
     },            
     insertAroundSelection: function(textBefore, textAfter) {
