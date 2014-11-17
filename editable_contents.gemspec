@@ -5,4 +5,5 @@ Gem::Specification.new do |s|
   s.version = "0.0.1"
   s.authors = ['Nicholas Jakobsen', 'Ryan Wallace']
   s.add_dependency("redcarpet", "~> 3.0.0")
+  s.add_dependency "rails", "~> 4.1.0"
 end
